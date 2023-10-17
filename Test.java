@@ -4,10 +4,10 @@ import java.util.ArrayList;
 public class Test {
     public static void main(String args[]) {
         int[][] adjacency_matrix = {
-            { 0, 20,  0, 70,  0},
+            { 0, 20,  0, 80,  0},
             {20,  0, 25,  0,  0},
             { 0, 25,  0, 30,  0},
-            {70,  0, 30,  0, 15},
+            {80,  0, 30,  0, 15},
             { 0,  0,  0, 15,  0}
         };
         HashMap<Integer, PathNode> nodes = new HashMap<>();

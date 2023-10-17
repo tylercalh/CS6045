@@ -10,17 +10,6 @@ public class Test {
             {80,  0, 30,  0, 15},
             { 0,  0,  0, 15,  0}
         };
-        HashMap<Integer, PathNode> nodes = new HashMap<>();
-        PathNode n0 = new PathNode(0);
-        PathNode n1 = new PathNode(1);
-        PathNode n2 = new PathNode(2);
-        PathNode n3 = new PathNode(3);
-        PathNode n4 = new PathNode(4);
-        nodes.put(0, n0);
-        nodes.put(1, n1);
-        nodes.put(2, n2);
-        nodes.put(3, n3);
-        nodes.put(4, n4);
 
         PathFinder pathFinder = new PathFinder(adjacency_matrix);
 

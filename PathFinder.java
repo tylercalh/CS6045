@@ -40,7 +40,7 @@ public class PathFinder {
             // Obtain the current node's neighbor nodes.
             ArrayList<Integer> neighbors = new ArrayList<>();
             for(int i = 0; i < adjacency_matrix[0].length; i++) {
-                if(adjacency_matrix[current.index][i] == 1) neighbors.add(i);
+                if(adjacency_matrix[current.index][i] > 0) neighbors.add(i);
             }
 
             for(int neighbor : neighbors) {

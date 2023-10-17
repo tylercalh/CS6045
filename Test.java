@@ -22,7 +22,7 @@ public class Test {
         nodes.put(3, n3);
         nodes.put(4, n4);
 
-        PathFinder pathFinder = new PathFinder(adjacency_matrix, nodes);
+        PathFinder pathFinder = new PathFinder(adjacency_matrix);
 
         long startTime = System.nanoTime();
         ArrayList<Integer> foundPath = pathFinder.findPath(0, 4);

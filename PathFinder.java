@@ -7,9 +7,12 @@ public class PathFinder {
     int[][] adjacency_matrix;
     HashMap<Integer, PathNode> nodes;
 
-    PathFinder(int[][] adjacency_matrix, HashMap<Integer, PathNode> nodes) {
+    PathFinder(int[][] adjacency_matrix) {
         this.adjacency_matrix = adjacency_matrix;
-        this.nodes = nodes;
+        this.nodes = new HashMap<>();
+        for(int i = 0; i < adjacency_matrix[0].length; i++) {
+            this.nodes.put(i, new PathNode(i));
+        }
     }
 
     public ArrayList<Integer> findPath(int start, int goal) {

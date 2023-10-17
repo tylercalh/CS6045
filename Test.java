@@ -67,6 +67,28 @@ public class Test {
         System.out.println("Duration: " + duration + " ns\n");
 
         // Testing astar with h(n) = distance(node, goal_node):
+        System.out.println("Testing A* with euclidean distance heuristic:\n");
+
+        startTime = System.nanoTime();
+        foundPath = pathFinderSimple.findPath(0, 5, coordinatesSimple);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        printPath(foundPath);
+        System.out.println("Duration: " + duration + " ns\n");
+
+        startTime = System.nanoTime();
+        foundPath = pathFinderMedium.findPath(0, 11, coordinatesMedium);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        printPath(foundPath);
+        System.out.println("Duration: " + duration + " ns\n");
+
+        startTime = System.nanoTime();
+        foundPath = pathFinderDifficult.findPath(0, 14, coordinatesDifficult);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        printPath(foundPath);
+        System.out.println("Duration: " + duration + " ns\n");
     }
 
     private static void printPath(ArrayList<Integer> path) {

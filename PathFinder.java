@@ -74,4 +74,63 @@ public class PathFinder {
         }
         return path;
     }
+
+    public ArrayList<Integer> findPath(int start, int goal, int[][] coordinates) {
+        PriorityQueue<PathNode> open = new PriorityQueue<>((o1, o2) -> Double.compare(o1.gn + o1.hn, o2.gn + o2.hn));
+        HashSet<Integer> closed = new HashSet<>();
+        ArrayList<Integer> path = new ArrayList<>();
+        PathNode goalNode = nodes.get(goal);
+
+        open.add(nodes.get(start)); 
+        while(open.size() > 0) {
+            PathNode current = open.poll();
+            closed.add(current.index); 
+
+            if(current.index == goal) {
+                PathNode child = goalNode;
+                while(child.index != start) {
+                    path.add(child.index);
+                    child = child.parent;
+                }
+                path.add(start);
+                return path;
+            }
+
+            ArrayList<Integer> neighbors = new ArrayList<>();
+            for(int i = 0; i < adjacency_matrix[0].length; i++) {
+                if(adjacency_matrix[current.index][i] > 0) neighbors.add(i);
+            }
+
+            for(int neighbor : neighbors) {
+                if (closed.contains(neighbor)) {
+                    continue;
+                }
+                PathNode neighborNode = nodes.get(neighbor);
+                
+                // If the gn is Double.MAX value then gn has not been set.
+                double currentgn = (current.gn == Double.MAX_VALUE) ? 0 : current.gn; 
+                double neighborgn = (neighborNode.gn == Double.MAX_VALUE) ? 0 : neighborNode.gn;
+
+                // Calculate the cost of moving to the neighbor node, g(n).
+                double movementCost = currentgn + adjacency_matrix[current.index][neighborNode.index];
+
+                // We have to update the neighbor node if a path to the neighbor node has not been set or we have calculated a shorter path (smaller g(n)).
+                if(movementCost < neighborgn || neighborNode.gn == Double.MAX_VALUE || !open.contains(neighborNode)) {
+                    neighborNode.gn = movementCost;
+                    // There is no heuristic therefor h(n) = 0. This is where a heuristic would be calculated.
+                    neighborNode.hn = 0;
+                    neighborNode.parent = current;
+
+                    if (!open.contains(neighborNode)) {
+                        open.add(neighborNode);
+                    }
+                }
+            }
+        }
+        return path;
+    }
+
+    private double getDistance(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+    }
 }

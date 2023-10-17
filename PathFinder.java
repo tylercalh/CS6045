@@ -109,8 +109,6 @@ public class PathFinder {
                 
                 double currentgn = (current.gn == Double.MAX_VALUE) ? 0 : current.gn; 
                 double neighborgn = (neighborNode.gn == Double.MAX_VALUE) ? 0 : neighborNode.gn;
-
-                //double movementCost = currentgn + adjacency_matrix[current.index][neighborNode.index];
                 double movementCost = currentgn + getDistance(coordinates[current.index][0], coordinates[current.index][1], coordinates[neighborNode.index][0], coordinates[neighborNode.index][1]);
 
                 if(movementCost < neighborgn || neighborNode.gn == Double.MAX_VALUE || !open.contains(neighborNode)) {

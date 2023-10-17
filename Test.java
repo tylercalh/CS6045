@@ -11,11 +11,11 @@ public class Test {
             {0, 0, 1, 1, 0}
         };
         HashMap<Integer, PathNode> nodes = new HashMap<>();
-        PathNode n0 = new PathNode(0, 10, 2);
-        PathNode n1 = new PathNode(1, 12, 10);
-        PathNode n2 = new PathNode(2, 6, 10);
-        PathNode n3 = new PathNode(3, 12, 19);
-        PathNode n4 = new PathNode(4, 7, 20);
+        PathNode n0 = new PathNode(0);
+        PathNode n1 = new PathNode(1);
+        PathNode n2 = new PathNode(2);
+        PathNode n3 = new PathNode(3);
+        PathNode n4 = new PathNode(4);
         nodes.put(0, n0);
         nodes.put(1, n1);
         nodes.put(2, n2);

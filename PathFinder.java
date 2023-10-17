@@ -54,12 +54,13 @@ public class PathFinder {
                 double neighborgn = (neighborNode.gn == Double.MAX_VALUE) ? 0 : neighborNode.gn;
 
                 // Calculate the cost of moving to the neighbor node, g(n).
-                double movementCost = currentgn + getDistance(current.x, current.y, neighborNode.x, neighborNode.y);
+                double movementCost = currentgn + adjacency_matrix[current.index][neighborNode.index];
 
                 // We have to update the neighbor node if a path to the neighbor node has not been set or we have calculated a shorter path (smaller g(n)).
                 if(movementCost < neighborgn || neighborNode.gn == Double.MAX_VALUE || !open.contains(neighborNode)) {
                     neighborNode.gn = movementCost;
-                    neighborNode.hn = getDistance(neighborNode.x, neighborNode.y, goalNode.x, goalNode.y);
+                    // There is no heuristic therefor h(n) = 0. This is where a heuristic would be calculated.
+                    neighborNode.hn = 0;
                     neighborNode.parent = current;
 
                     if (!open.contains(neighborNode)) {
@@ -69,9 +70,5 @@ public class PathFinder {
             }
         }
         return path;
-    }
-
-    private double getDistance(double x1, double y1, double x2, double y2) {
-        return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
     }
 }

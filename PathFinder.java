@@ -74,4 +74,58 @@ public class PathFinder {
         }
         return path;
     }
+
+    public ArrayList<Integer> findPath(int start, int goal, int[][] coordinates) {
+        PriorityQueue<PathNode> open = new PriorityQueue<>((o1, o2) -> Double.compare(o1.gn + o1.hn, o2.gn + o2.hn));
+        HashSet<Integer> closed = new HashSet<>();
+        ArrayList<Integer> path = new ArrayList<>();
+        PathNode goalNode = nodes.get(goal);
+
+        open.add(nodes.get(start)); 
+        while(open.size() > 0) {
+            PathNode current = open.poll();
+            closed.add(current.index); 
+
+            if(current.index == goal) {
+                PathNode child = goalNode;
+                while(child.index != start) {
+                    path.add(child.index);
+                    child = child.parent;
+                }
+                path.add(start);
+                return path;
+            }
+
+            ArrayList<Integer> neighbors = new ArrayList<>();
+            for(int i = 0; i < adjacency_matrix[0].length; i++) {
+                if(adjacency_matrix[current.index][i] > 0) neighbors.add(i);
+            }
+
+            for(int neighbor : neighbors) {
+                if (closed.contains(neighbor)) {
+                    continue;
+                }
+                PathNode neighborNode = nodes.get(neighbor);
+                
+                double currentgn = (current.gn == Double.MAX_VALUE) ? 0 : current.gn; 
+                double neighborgn = (neighborNode.gn == Double.MAX_VALUE) ? 0 : neighborNode.gn;
+                double movementCost = currentgn + getDistance(coordinates[current.index][0], coordinates[current.index][1], coordinates[neighborNode.index][0], coordinates[neighborNode.index][1]);
+
+                if(movementCost < neighborgn || neighborNode.gn == Double.MAX_VALUE || !open.contains(neighborNode)) {
+                    neighborNode.gn = movementCost;
+                    neighborNode.hn = getDistance(coordinates[neighborNode.index][0], coordinates[neighborNode.index][1], coordinates[goal][0], coordinates[goal][1]);
+                    neighborNode.parent = current;
+
+                    if (!open.contains(neighborNode)) {
+                        open.add(neighborNode);
+                    }
+                }
+            }
+        }
+        return path;
+    }
+
+    private double getDistance(int x1, int y1, int x2, int y2) {
+        return Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+    }
 }

@@ -107,18 +107,15 @@ public class PathFinder {
                 }
                 PathNode neighborNode = nodes.get(neighbor);
                 
-                // If the gn is Double.MAX value then gn has not been set.
                 double currentgn = (current.gn == Double.MAX_VALUE) ? 0 : current.gn; 
                 double neighborgn = (neighborNode.gn == Double.MAX_VALUE) ? 0 : neighborNode.gn;
 
-                // Calculate the cost of moving to the neighbor node, g(n).
-                double movementCost = currentgn + adjacency_matrix[current.index][neighborNode.index];
+                //double movementCost = currentgn + adjacency_matrix[current.index][neighborNode.index];
+                double movementCost = currentgn + getDistance(coordinates[current.index][0], coordinates[current.index][1], coordinates[neighborNode.index][0], coordinates[neighborNode.index][1]);
 
-                // We have to update the neighbor node if a path to the neighbor node has not been set or we have calculated a shorter path (smaller g(n)).
                 if(movementCost < neighborgn || neighborNode.gn == Double.MAX_VALUE || !open.contains(neighborNode)) {
                     neighborNode.gn = movementCost;
-                    // There is no heuristic therefor h(n) = 0. This is where a heuristic would be calculated.
-                    neighborNode.hn = 0;
+                    neighborNode.hn = getDistance(coordinates[neighborNode.index][0], coordinates[neighborNode.index][1], coordinates[goal][0], coordinates[goal][1]);
                     neighborNode.parent = current;
 
                     if (!open.contains(neighborNode)) {
@@ -130,7 +127,7 @@ public class PathFinder {
         return path;
     }
 
-    private double getDistance(double x1, double y1, double x2, double y2) {
+    private double getDistance(int x1, int y1, int x2, int y2) {
         return Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
     }
 }

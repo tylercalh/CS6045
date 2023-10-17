@@ -12,6 +12,5 @@ public class PathNode {
         this.y = y;
         this.gn = Double.MAX_VALUE;
         this.hn = Double.MAX_VALUE;
-        PathNode parent = null;
     }
 }

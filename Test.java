@@ -5,12 +5,12 @@ import java.io.FileNotFoundException;
 public class Test {
     public static void main(String args[]) {
         // Paths:
-        String adjacencyMatrixSimplePath = "./../graphs/simple/adj.txt";
-        String adjacencyMatrixMediumPath = "./../graphs/medium/adj.txt";
-        String adjacencyMatrixDifficultPath = "./../graphs/difficult/adj.txt";
-        String coordinatesSimplePath = "./../graphs/simple/coords.txt";
-        String coordinatesMediumPath = "./../graphs/medium/coords.txt";
-        String coordinatesDifficultPath = "./../graphs/difficult/coords.txt";
+        String adjacencyMatrixSimplePath = "./graphs/simple/adj.txt";
+        String adjacencyMatrixMediumPath = "./graphs/medium/adj.txt";
+        String adjacencyMatrixDifficultPath = "./graphs/difficult/adj.txt";
+        String coordinatesSimplePath = "./graphs/simple/coords.txt";
+        String coordinatesMediumPath = "./graphs/medium/coords.txt";
+        String coordinatesDifficultPath = "./graphs/difficult/coords.txt";
 
         int[][] adjacencyMatrixSimple;
         int[][] adjacencyMatrixMedium;
@@ -19,6 +19,7 @@ public class Test {
         int[][] coordinatesMedium;
         int[][] coordinatesDifficult;
 
+        // Load data from files:
         try {
             adjacencyMatrixSimple = GraphUtility.AdjMatrixFromFile(new File(adjacencyMatrixSimplePath));
             adjacencyMatrixMedium = GraphUtility.AdjMatrixFromFile(new File(adjacencyMatrixMediumPath));
@@ -29,10 +30,50 @@ public class Test {
 
         } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe);
+            return;
         }
 
+        // Create PathFinders:
+        PathFinder pathFinderSimple = new PathFinder(adjacencyMatrixSimple);
+        PathFinder pathFinderMedium = new PathFinder(adjacencyMatrixMedium);
+        PathFinder pathFinderDifficult = new PathFinder(adjacencyMatrixDifficult);
+
         // Testing astar with h(n) = 0:
-        
+        ArrayList<Integer> foundPath;
+        long startTime;
+        long endTime;
+        long duration;
+        System.out.println("Testing A* with no heuristic:\n");
+
+        startTime = System.nanoTime();
+        foundPath = pathFinderSimple.findPath(0, 5);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        printPath(foundPath);
+        System.out.println("Duration: " + duration + " ns\n");
+
+        startTime = System.nanoTime();
+        foundPath = pathFinderMedium.findPath(0, 11);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        printPath(foundPath);
+        System.out.println("Duration: " + duration + " ns\n");
+
+        startTime = System.nanoTime();
+        foundPath = pathFinderDifficult.findPath(0, 14);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        printPath(foundPath);
+        System.out.println("Duration: " + duration + " ns\n");
+
         // Testing astar with h(n) = distance(node, goal_node):
+    }
+
+    private static void printPath(ArrayList<Integer> path) {
+        System.out.print("Path: ");
+        for (int index : path) {
+            System.out.print(index + " ");
+        }
+        System.out.println();
     }
 }

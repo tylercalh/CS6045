@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class PathFinder {
     int[][] adjacency_matrix;
     HashMap<Integer, PathNode> nodes;
+    int nodesVisited;
 
     PathFinder(int[][] adjacency_matrix) {
         this.adjacency_matrix = adjacency_matrix;
@@ -13,6 +14,7 @@ public class PathFinder {
         for(int i = 0; i < adjacency_matrix[0].length; i++) {
             this.nodes.put(i, new PathNode(i));
         }
+        this.nodesVisited = -1;
     }
 
     public ArrayList<Integer> findPath(int start, int goal) {
@@ -37,6 +39,8 @@ public class PathFinder {
                     child = child.parent;
                 }
                 path.add(start);
+
+                nodesVisited = closed.size(); // Collect this metric.
                 return path;
             }
 
@@ -93,6 +97,8 @@ public class PathFinder {
                     child = child.parent;
                 }
                 path.add(start);
+
+                nodesVisited = closed.size();
                 return path;
             }
 

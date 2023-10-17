@@ -33,12 +33,12 @@ public class Test {
             return;
         }
 
+        // Testing astar with h(n) = 0:
         // Create PathFinders:
         PathFinder pathFinderSimple = new PathFinder(adjacencyMatrixSimple);
         PathFinder pathFinderMedium = new PathFinder(adjacencyMatrixMedium);
         PathFinder pathFinderDifficult = new PathFinder(adjacencyMatrixDifficult);
 
-        // Testing astar with h(n) = 0:
         ArrayList<Integer> foundPath;
         long startTime;
         long endTime;
@@ -71,6 +71,11 @@ public class Test {
         System.out.println("Duration: " + duration + " ns\n");
         
         // Testing astar with h(n) = distance(node, goal_node):
+        // Create PathFinders:
+        pathFinderSimple = new PathFinder(adjacencyMatrixSimple);
+        pathFinderMedium = new PathFinder(adjacencyMatrixMedium);
+        pathFinderDifficult = new PathFinder(adjacencyMatrixDifficult);
+
         System.out.println("Testing A* with euclidean distance heuristic:\n");
 
         startTime = System.nanoTime();
@@ -78,6 +83,7 @@ public class Test {
         endTime = System.nanoTime();
         duration = endTime - startTime;
         printPath(foundPath);
+        System.out.println("Nodes visited: " + pathFinderSimple.nodesVisited);
         System.out.println("Duration: " + duration + " ns\n");
 
         startTime = System.nanoTime();
@@ -85,6 +91,7 @@ public class Test {
         endTime = System.nanoTime();
         duration = endTime - startTime;
         printPath(foundPath);
+        System.out.println("Nodes visited: " + pathFinderMedium.nodesVisited);
         System.out.println("Duration: " + duration + " ns\n");
 
         startTime = System.nanoTime();
@@ -92,6 +99,7 @@ public class Test {
         endTime = System.nanoTime();
         duration = endTime - startTime;
         printPath(foundPath);
+        System.out.println("Nodes visited: " + pathFinderDifficult.nodesVisited);
         System.out.println("Duration: " + duration + " ns\n");
     }
 

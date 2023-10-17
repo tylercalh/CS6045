@@ -30,11 +30,11 @@ public class GraphUtility {
             // Put values from file into matrix
             for (int i = 0; i < vals.length; i++) {
                 adjacencyMatrix[rowIndex][i] = Integer.parseInt(vals[i]);
-                System.out.print(vals[i] + " ");
+                //System.out.print(vals[i] + " ");
             }
             // Increment counter to check next row
             rowIndex++;
-            System.out.println();
+            //System.out.println();
 
         }
         rowReader.close();

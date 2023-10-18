@@ -19,6 +19,10 @@ public class Test {
         int[][] coordinatesMedium;
         int[][] coordinatesDifficult;
 
+        double[][] wAdjacencyMatrixSimple;
+        double[][] wAdjacencyMatrixMedium;
+        double[][] wAdjacencyMatrixDifficult;
+
         // Load data from files:
         try {
             adjacencyMatrixSimple = GraphUtility.AdjMatrixFromFile(new File(adjacencyMatrixSimplePath));
@@ -27,6 +31,11 @@ public class Test {
             coordinatesSimple = GraphUtility.VertexCoordsFromfile(new File(coordinatesSimplePath));
             coordinatesMedium = GraphUtility.VertexCoordsFromfile(new File(coordinatesMediumPath));
             coordinatesDifficult = GraphUtility.VertexCoordsFromfile(new File(coordinatesDifficultPath));
+
+            wAdjacencyMatrixSimple = GraphUtility.WeightedAdjMatrixFromCoords(adjacencyMatrixSimple, coordinatesSimple);
+            wAdjacencyMatrixMedium = GraphUtility.WeightedAdjMatrixFromCoords(adjacencyMatrixMedium, coordinatesMedium);
+            wAdjacencyMatrixDifficult = GraphUtility.WeightedAdjMatrixFromCoords(adjacencyMatrixDifficult,
+                    coordinatesDifficult);
 
         } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe);
@@ -52,7 +61,7 @@ public class Test {
         printPath(foundPath);
         System.out.println("Nodes visited: " + pathFinderSimple.nodesVisited);
         System.out.println("Duration: " + duration + " ns\n");
-        
+
         startTime = System.nanoTime();
         foundPath = pathFinderMedium.findPath(0, 11);
         endTime = System.nanoTime();
@@ -60,7 +69,6 @@ public class Test {
         printPath(foundPath);
         System.out.println("Nodes visited: " + pathFinderMedium.nodesVisited);
         System.out.println("Duration: " + duration + " ns\n");
-        
 
         startTime = System.nanoTime();
         foundPath = pathFinderDifficult.findPath(0, 14);
@@ -69,7 +77,7 @@ public class Test {
         printPath(foundPath);
         System.out.println("Nodes visited: " + pathFinderDifficult.nodesVisited);
         System.out.println("Duration: " + duration + " ns\n");
-        
+
         // Testing astar with h(n) = distance(node, goal_node):
         // Create PathFinders:
         pathFinderSimple = new PathFinder(adjacencyMatrixSimple);

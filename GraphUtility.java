@@ -18,10 +18,10 @@ public class GraphUtility {
     // }
 
     // Get adjacency matrix from file
-    public static int[][] AdjMatrixFromFile(File f) throws FileNotFoundException {
+    public static double[][] AdjMatrixFromFile(File f) throws FileNotFoundException {
         Scanner rowReader = new Scanner(f);
         int rowIndex = 0;
-        int[][] adjacencyMatrix = null;
+        double[][] adjacencyMatrix = null;
         while (rowReader.hasNextLine()) {
             String row = rowReader.nextLine();
             // Sanitize the string
@@ -30,11 +30,11 @@ public class GraphUtility {
             String[] vals = row.split(" +");
             // Use this to create the adjacency matrix
             if (adjacencyMatrix == null) {
-                adjacencyMatrix = new int[vals.length][vals.length];
+                adjacencyMatrix = new double[vals.length][vals.length];
             }
             // Put values from file into matrix
             for (int i = 0; i < vals.length; i++) {
-                adjacencyMatrix[rowIndex][i] = Integer.parseInt(vals[i]);
+                adjacencyMatrix[rowIndex][i] = Double.parseDouble(vals[i]);
                 // System.out.print(vals[i] + " ");
             }
             // Increment counter to check next row
@@ -69,7 +69,7 @@ public class GraphUtility {
         return vertexCoords;
     }
 
-    public static double[][] WeightedAdjMatrixFromCoords(int[][] adjacencyMatrix, int[][] coords) {
+    public static double[][] WeightedAdjMatrixFromCoords(double[][] adjacencyMatrix, int[][] coords) {
         double[][] wAdjMatrix = new double[adjacencyMatrix.length][adjacencyMatrix.length];
         for (int i = 0; i < adjacencyMatrix.length; i++) {
             for (int j = 0; j < adjacencyMatrix.length; j++) {

@@ -4,13 +4,18 @@ import java.util.Scanner;
 
 public class GraphUtility {
 
-    public static void main(String[] args) {
-        try {
-            int[][] coords = VertexCoordsFromfile(new File("./graphs/simpleCoords.txt"));
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        }
-    }
+    // Use for testing
+    // public static void main(String[] args) {
+    // try {
+    // int[][] coords = VertexCoordsFromfile(new
+    // File("./graphs/simple/coords.txt"));
+    // int[][] adjM = AdjMatrixFromFile(new File("./graphs/simple/adj.txt"));
+    // double[][] wAdjM = WeightedAdjMatrixFromCoords(adjM, coords);
+    // System.out.println();
+    // } catch (FileNotFoundException e) {
+    // System.out.println(e);
+    // }
+    // }
 
     // Get adjacency matrix from file
     public static int[][] AdjMatrixFromFile(File f) throws FileNotFoundException {
@@ -30,11 +35,11 @@ public class GraphUtility {
             // Put values from file into matrix
             for (int i = 0; i < vals.length; i++) {
                 adjacencyMatrix[rowIndex][i] = Integer.parseInt(vals[i]);
-                //System.out.print(vals[i] + " ");
+                // System.out.print(vals[i] + " ");
             }
             // Increment counter to check next row
             rowIndex++;
-            //System.out.println();
+            // System.out.println();
 
         }
         rowReader.close();
@@ -62,5 +67,21 @@ public class GraphUtility {
         }
         rowReader.close();
         return vertexCoords;
+    }
+
+    public static double[][] WeightedAdjMatrixFromCoords(int[][] adjacencyMatrix, int[][] coords) {
+        double[][] wAdjMatrix = new double[adjacencyMatrix.length][adjacencyMatrix.length];
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            for (int j = 0; j < adjacencyMatrix.length; j++) {
+                if (adjacencyMatrix[i][j] != 0) {
+                    // Gets the distance between the points i and j
+                    int dX = coords[i][0] - coords[j][0];
+                    int dY = coords[i][1] - coords[j][1];
+                    double distance = Math.sqrt((dX * dX) + (dY * dY));
+                    wAdjMatrix[i][j] = distance;
+                }
+            }
+        }
+        return wAdjMatrix;
     }
 }

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 // Class for storing the results of a pathfinding method
 public class Results {
-    private ArrayList<Integer> path; // An ArrayList of integers holding the 
+    private ArrayList<Integer> path; // An ArrayList of integers holding the indices of the path
     private int numNodesExplored;
     private double pathLength;
 

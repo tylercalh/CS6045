@@ -6,6 +6,8 @@ public class Graph {
     double[][] adjacency_matrix;
     HashMap<Integer, PathNode> nodes;
 
+    // If only one file path is supplied then the resulting Graph will be unweighted.
+    // adj_filepath -- a String representing the file path of an adj.txt. For example "./graphs/medium/adj.txt"
     public Graph(String adj_filepath) {
         File adj_file = new File(adj_filepath);
 
@@ -18,10 +20,13 @@ public class Graph {
         }
     }
 
+    // If two file paths are supplied the resulting Graph will be weighted.
+    // adj_filepath -- a String representing the file path of an adj.txt. For example "./graphs/medium/adj.txt"
+    // coord_filepath -- a String representing the file path of a coord.txt. For example "./graphs/medium/coord.txt"
     public Graph(String adj_filepath, String coord_filepath) {
         File adj_file = new File(adj_filepath);
         File coord_file = new File(adj_filepath);
-        
+
         try {
             int[][] vertexCoords = GraphUtility.VertexCoordsFromfile(coord_file);
             double[][] adjacency_matrix = GraphUtility.AdjMatrixFromFile(adj_file);

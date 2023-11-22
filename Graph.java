@@ -25,7 +25,7 @@ public class Graph {
     // coord_filepath -- a String representing the file path of a coord.txt. For example "./graphs/medium/coord.txt"
     public Graph(String adj_filepath, String coord_filepath) {
         File adj_file = new File(adj_filepath);
-        File coord_file = new File(adj_filepath);
+        File coord_file = new File(coord_filepath);
 
         try {
             int[][] vertexCoords = GraphUtility.VertexCoordsFromfile(coord_file);

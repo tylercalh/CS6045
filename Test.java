@@ -12,9 +12,9 @@ public class Test {
         String coordinatesMediumPath = "./graphs/medium/coords.txt";
         String coordinatesDifficultPath = "./graphs/difficult/coords.txt";
 
-        int[][] adjacencyMatrixSimple;
-        int[][] adjacencyMatrixMedium;
-        int[][] adjacencyMatrixDifficult;
+        double[][] adjacencyMatrixSimple;
+        double[][] adjacencyMatrixMedium;
+        double[][] adjacencyMatrixDifficult;
         int[][] coordinatesSimple;
         int[][] coordinatesMedium;
         int[][] coordinatesDifficult;
@@ -80,9 +80,9 @@ public class Test {
 
         // Testing astar with h(n) = distance(node, goal_node):
         // Create PathFinders:
-        pathFinderSimple = new PathFinder(adjacencyMatrixSimple);
-        pathFinderMedium = new PathFinder(adjacencyMatrixMedium);
-        pathFinderDifficult = new PathFinder(adjacencyMatrixDifficult);
+        pathFinderSimple = new PathFinder(wAdjacencyMatrixSimple);
+        pathFinderMedium = new PathFinder(wAdjacencyMatrixMedium);
+        pathFinderDifficult = new PathFinder(wAdjacencyMatrixDifficult);
 
         System.out.println("Testing A* with euclidean distance heuristic:\n");
 
@@ -103,7 +103,7 @@ public class Test {
         System.out.println("Duration: " + duration + " ns\n");
 
         startTime = System.nanoTime();
-        foundPath = pathFinderDifficult.findPath(0, 14, coordinatesDifficult);
+        foundPath = pathFinderDifficult.findPath(0, 15, coordinatesDifficult);
         endTime = System.nanoTime();
         duration = endTime - startTime;
         printPath(foundPath);

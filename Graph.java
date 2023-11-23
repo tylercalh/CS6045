@@ -9,7 +9,7 @@ public class Graph {
     double[][] w_adjacency_matrix;
     // coordinates are stored in this form:
     // [[x1, y1],[x2,y2],[x3,y3],...[xn, yn]]
-    int[][] coordinates;
+    double[][] coordinates;
 
     // adj_filepath -- a String representing the file path of an adj.txt. For example "./more_graphs/realistic_medium/adj.txt"
     // wadj_filepath -- a String representing the file path of a wadj.txt. For example "./more_graphs/realistic_medium/wadj.txt"
@@ -26,7 +26,7 @@ public class Graph {
             double[][] w_adjacency_matrix = GraphUtility.AdjMatrixFromFile(wadj_file);
             this.w_adjacency_matrix = w_adjacency_matrix;
 
-            int[][] coordinates = GraphUtility.VertexCoordsFromfile(coord_file);
+            double[][] coordinates = GraphUtility.VertexCoordsFromfile(coord_file);
             this.coordinates = coordinates;
         } catch (FileNotFoundException fnfe) {
             System.err.println(fnfe);

@@ -46,7 +46,7 @@ public class GraphUtility {
         return adjacencyMatrix;
     }
 
-    public static int[][] VertexCoordsFromfile(File f) throws FileNotFoundException {
+    public static double[][] VertexCoordsFromfile(File f) throws FileNotFoundException {
         // Coordinate files will be in the following format:
         /*
          * N (where N = number of vertices)
@@ -58,12 +58,12 @@ public class GraphUtility {
         Scanner rowReader = new Scanner(f);
         int numVertices = rowReader.nextInt();
         rowReader.nextLine();
-        int[][] vertexCoords = new int[numVertices][2];
+        double[][] vertexCoords = new double[numVertices][2];
         // Read each row and pass the numbers into the coordinates array
         for (int i = 0; i < numVertices; i++) {
             String[] row = rowReader.nextLine().split(" ");
-            vertexCoords[i][0] = Integer.parseInt(row[0]);
-            vertexCoords[i][1] = Integer.parseInt(row[1]);
+            vertexCoords[i][0] = Double.parseDouble(row[0]);
+            vertexCoords[i][1] = Double.parseDouble(row[1]);
         }
         rowReader.close();
         return vertexCoords;

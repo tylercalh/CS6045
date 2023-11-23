@@ -27,7 +27,7 @@ public class AEpsilonStar implements IPathFinder{
         double pathLength = 0;
 
         while (open.size() > 0) {
-            PathNode current = open.poll(); // Obtain the node with the lowest f(n)
+            PathNode current = focal.isEmpty() ? open.poll() : focal.poll(); // Obtain the node with the lowest f(n) (in the FOCAL list if there are any)
             closed.add(current.index); // Mark the current node as explored
 
             if (current.index == end) { // We have reached the goal node.
@@ -60,9 +60,7 @@ public class AEpsilonStar implements IPathFinder{
                 // Calculate g(n), cost of moving to the neighbor node
                 double movementCost = currentgn + g.adjacency_matrix[current.index][neighbor];
 
-
-                // We have to update the neighbor node if a path to the neighbor node has not
-                // been set or we have calculated a shorter path (smaller g(n)).
+                // We have to update the neighbor node if a path to the neighbor node has not been set or we have calculated a shorter path (smaller g(n)).
                 if (movementCost < neighborgn || neighborNode.gn == Double.MAX_VALUE || !open.contains(neighborNode)) {
                     neighborNode.gn = movementCost;
                     // Heuristic goes here
@@ -74,7 +72,19 @@ public class AEpsilonStar implements IPathFinder{
                     }
                 }
             }
-
+            if(!open.isEmpty()) {
+                // For all the newly opened nodes, check if they can be added to FOCAL. This is done in a separate loop so that all the neighbors can be generated and added to OPEN first
+                for (int neighbor : neighbors) {
+                    PathNode neighborNode = nodes.get(neighbor);
+                    PathNode smallestfnNode = open.peek();
+                    double neighborfn = neighborNode.gn + neighborNode.hn;
+                    double smallestfn = smallestfnNode.gn + smallestfnNode.hn;
+                    // If this node's f(n) deviates from the node with the lowest f(n) by a factor less than (1 + e), then it is "similar" to the node with the lowest f(n) and is added to FOCAL
+                    if (neighborfn <= (1 + e) * smallestfn && !focal.contains(neighborNode)) {
+                        focal.add(neighborNode);
+                    }
+                }
+            }
         }
         return new Results(path, numNodesExplored, pathLength);
     }

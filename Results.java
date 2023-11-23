@@ -31,7 +31,6 @@ public class Results {
 
     // Getters
 
-
     public ArrayList<Integer> getPath() {
         return path;
     }
@@ -42,5 +41,17 @@ public class Results {
 
     public double getPathLength() {
         return pathLength;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        str += "Path: ";
+        for (Integer i : path) {
+            str = str.concat(i + ", ");
+        }
+        str += "\nPath length: " + pathLength + "\nNodes visited: " + numNodesExplored;
+
+        return str;
     }
 }

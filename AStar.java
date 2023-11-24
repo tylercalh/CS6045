@@ -5,6 +5,16 @@ import java.util.PriorityQueue;
 
 // An implmentation of A* that uses euclidean distance as its heuristic.
 public class AStar implements IPathFinder {
+    public double weight;
+
+    public AStar() {
+        this.weight = 1.0;
+    }
+
+    public AStar(double weight) {
+        this.weight = weight;
+    }
+
     public Results findPath(Graph g, int start, int goal) {
         // First we have to build some path nodes to maintain node states as the algorithm runs.
         HashMap<Integer, PathNode> nodes = g.buildNodes();
@@ -82,7 +92,8 @@ public class AStar implements IPathFinder {
                     y1 = g.coordinates[neighborNode.index][1];
                     x2 = g.coordinates[goal][0];
                     y2 = g.coordinates[goal][1];
-                    neighborNode.hn = getDistance(x1, y1, x2, y2);
+                    // Multiply h(n) by weight.
+                    neighborNode.hn = this.weight * getDistance(x1, y1, x2, y2);
 
                     // Update neighbors parent (we reach neighbor through current).
                     neighborNode.parent = current;

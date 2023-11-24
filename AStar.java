@@ -11,6 +11,10 @@ public class AStar implements IPathFinder {
         this.weight = 1.0;
     }
 
+    // Constructor with specified weight.
+    // When weight is 0.0 A* works similarly to Dijkstra's.
+    // When weight is 1.0 A* takes h(n) into account.
+    // When weight is greater than 1.0 h(n) begins to dominate g(n).
     public AStar(double weight) {
         this.weight = weight;
     }

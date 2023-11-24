@@ -77,7 +77,7 @@ public class AStar implements IPathFinder {
                 if (movementCost < neighborgn || neighborNode.gn == Double.MAX_VALUE || !open.contains(neighborNode)) {
                     neighborNode.gn = movementCost;
 
-                    // Calculate h(n) with euclidean distance.
+                    // Calculate h(n) with euclidean distance between neighbor node and goal node.
                     x1 = g.coordinates[neighborNode.index][0];
                     y1 = g.coordinates[neighborNode.index][1];
                     x2 = g.coordinates[goal][0];

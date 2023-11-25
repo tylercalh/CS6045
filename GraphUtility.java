@@ -25,7 +25,7 @@ public class GraphUtility {
         while (rowReader.hasNextLine()) {
             String row = rowReader.nextLine();
             // Sanitize the string
-            row = row.replaceAll("[^\\d]", " ");
+            row = row.replaceAll("[^.\\d]", " ");
             // Get array of values in the row
             String[] vals = row.split(" +");
             // Use this to create the adjacency matrix

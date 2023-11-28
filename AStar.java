@@ -103,10 +103,10 @@ public class AStar implements IPathFinder {
                     // Update neighbors parent (we reach neighbor through current).
                     neighborNode.parent = current;
 
-                    // Add the neighbor node to open if it isn't in it already.
-                    if (!open.contains(neighborNode)) {
-                        open.add(neighborNode);
-                    }
+                    // This pattern of removing then adding will force the PriorityQueue class to update the position of the node in the queue, or just add the node if it isn't already in the queue
+                    open.remove(neighborNode);
+                    open.add(neighborNode);
+                    System.out.println(" ");
                 }
             }
         }

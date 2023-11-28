@@ -160,10 +160,10 @@ public class AEpsilonStar implements IPathFinder{
                     // Update neighbors parent (we reach neighbor through current).
                     neighborNode.parent = current;
 
-                    // Add the neighbor node to open if it isn't in it already.
-                    if (!open.contains(neighborNode)) {
-                        open.add(neighborNode);
-                    }
+                    // This pattern of removing then adding will force the PriorityQueue class to update the position of the node in the queue, or just add the node if it isn't already in the queue
+                    open.remove(neighborNode);
+                    open.add(neighborNode);
+
                 }
             }
             if(!open.isEmpty()) {
@@ -176,7 +176,9 @@ public class AEpsilonStar implements IPathFinder{
                     double neighborfn = neighborNode.gn + neighborNode.hn;
                     double smallestfn = smallestfnNode.gn + smallestfnNode.hn;
                     // If this node's f(n) deviates from the node with the lowest f(n) by a factor less than (1 + e), then it is "similar" to the node with the lowest f(n) and is added to FOCAL
-                    if (neighborfn <= (1 + e) * smallestfn && !focal.contains(neighborNode)) {
+                    if (neighborfn <= (1 + e) * smallestfn) {
+                        // This pattern of removing then adding will force the PriorityQueue class to update the position of the node in the queue, or just add the node if it isn't already in the queue
+                        focal.remove(neighborNode);
                         focal.add(neighborNode);
 
                     }

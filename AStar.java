@@ -55,6 +55,7 @@ public class AStar implements IPathFinder {
                 res.setPath(path);
                 res.setNumNodesExplored(closed.size());
                 res.setPathLength(distance);
+                return res;
             }
 
             // Build a list of neighbor nodes that can be accessed from our current node.
@@ -82,7 +83,7 @@ public class AStar implements IPathFinder {
                 x2 = g.coordinates[neighborNode.index][0];
                 y2 = g.coordinates[neighborNode.index][1];
                 // The movenet cost to the neighbor is our current g(n) + distance(current, neighbor).
-                double movementCost = currentgn + getDistance(x1,y1,x2,y2);
+                double movementCost = currentgn + g.w_adjacency_matrix[current.index][neighbor];
 
                 // We need to update the neighbor nodes values if any of the following conditions are met:
                 // 1. movementCost < neighborgn: We have previously looked at a path to the neighbor, but now we have found a shorter one.
@@ -102,10 +103,10 @@ public class AStar implements IPathFinder {
                     // Update neighbors parent (we reach neighbor through current).
                     neighborNode.parent = current;
 
-                    // Add the neighbor node to open if it isn't in it already.
-                    if (!open.contains(neighborNode)) {
-                        open.add(neighborNode);
-                    }
+                    // This pattern of removing then adding will force the PriorityQueue class to update the position of the node in the queue, or just add the node if it isn't already in the queue
+                    open.remove(neighborNode);
+                    open.add(neighborNode);
+                    System.out.println(" ");
                 }
             }
         }

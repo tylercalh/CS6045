@@ -1,0 +1,120 @@
+Graph 1
+---1.0---
+Average nodes visited compared to A*: 0.4808149434132614
+Average path length compared to A*: 1.000351067927412
+---1.25---
+Average nodes visited compared to A*: 0.4105673523151614
+Average path length compared to A*: 1.002809676433922
+---1.5---
+Average nodes visited compared to A*: 0.38055329947754507
+Average path length compared to A*: 1.007375864970807
+---1.75---
+Average nodes visited compared to A*: 0.3657980590286791
+Average path length compared to A*: 1.0131902167750662
+---2.0---
+Average nodes visited compared to A*: 0.3501486836297038
+Average path length compared to A*: 1.02063618972018
+---2.25---
+Average nodes visited compared to A*: 0.34435405133236807
+Average path length compared to A*: 1.026077175326427
+---2.5---
+Average nodes visited compared to A*: 0.3398457162934191
+Average path length compared to A*: 1.0299402759081961
+---2.75---
+Average nodes visited compared to A*: 0.33235263826409234
+Average path length compared to A*: 1.0302614695743133
+---3.0---
+Average nodes visited compared to A*: 0.33337734030821414
+Average path length compared to A*: 1.0333987119490475
+---3.25---
+Average nodes visited compared to A*: 0.32726202324900083
+Average path length compared to A*: 1.0383310757885271
+---3.5---
+Average nodes visited compared to A*: 0.328818575393656
+Average path length compared to A*: 1.0468009413949346
+---3.75---
+Average nodes visited compared to A*: 0.3251040368642899
+Average path length compared to A*: 1.0521801563771895
+---4.0---
+Average nodes visited compared to A*: 0.32187097084606575
+Average path length compared to A*: 1.0530271255338755
+Graph 2
+---1.0---
+Average nodes visited compared to A*: 0.35023956251165567
+Average path length compared to A*: 1.0003095073906123
+---1.25---
+Average nodes visited compared to A*: 0.2637499654565887
+Average path length compared to A*: 1.0076127645561224
+---1.5---
+Average nodes visited compared to A*: 0.2292423973398982
+Average path length compared to A*: 1.0217121058357324
+---1.75---
+Average nodes visited compared to A*: 0.21004009175609045
+Average path length compared to A*: 1.0336579689458323
+---2.0---
+Average nodes visited compared to A*: 0.20312338100318034
+Average path length compared to A*: 1.0453719752272315
+---2.25---
+Average nodes visited compared to A*: 0.19608933258262026
+Average path length compared to A*: 1.0535482521930455
+---2.5---
+Average nodes visited compared to A*: 0.1924871029559406
+Average path length compared to A*: 1.0627362961300464
+---2.75---
+Average nodes visited compared to A*: 0.18805180763482596
+Average path length compared to A*: 1.0697492074151425
+---3.0---
+Average nodes visited compared to A*: 0.187336148174678
+Average path length compared to A*: 1.0753632639225044
+---3.25---
+Average nodes visited compared to A*: 0.18477024026568536
+Average path length compared to A*: 1.0792574305144949
+---3.5---
+Average nodes visited compared to A*: 0.18301506454513614
+Average path length compared to A*: 1.0823716442988667
+---3.75---
+Average nodes visited compared to A*: 0.18113899332377378
+Average path length compared to A*: 1.087686909019884
+---4.0---
+Average nodes visited compared to A*: 0.18377863283211165
+Average path length compared to A*: 1.089928155006032
+Graph 3
+---1.0---
+Average nodes visited compared to A*: 0.264887728683766
+Average path length compared to A*: 1.0005019808472857
+---1.25---
+Average nodes visited compared to A*: 0.15766119726847302
+Average path length compared to A*: 1.011183808986636
+---1.5---
+Average nodes visited compared to A*: 0.1188894605055176
+Average path length compared to A*: 1.0311136391958977
+---1.75---
+Average nodes visited compared to A*: 0.10327127308456768
+Average path length compared to A*: 1.0464083768973527
+---2.0---
+Average nodes visited compared to A*: 0.09716306134119501
+Average path length compared to A*: 1.0573330568408805
+---2.25---
+Average nodes visited compared to A*: 0.09404079527148247
+Average path length compared to A*: 1.071066619269556
+---2.5---
+Average nodes visited compared to A*: 0.08988568909795251
+Average path length compared to A*: 1.0793723397460695
+---2.75---
+Average nodes visited compared to A*: 0.09005964963822843
+Average path length compared to A*: 1.0853581965778707
+---3.0---
+Average nodes visited compared to A*: 0.08948003049054054
+Average path length compared to A*: 1.0938486523416147
+---3.25---
+Average nodes visited compared to A*: 0.08745783720670103
+Average path length compared to A*: 1.1006545400338064
+---3.5---
+Average nodes visited compared to A*: 0.08966274245272236
+Average path length compared to A*: 1.1058586443784724
+---3.75---
+Average nodes visited compared to A*: 0.08590869739867303
+Average path length compared to A*: 1.1113419209246296
+---4.0---
+Average nodes visited compared to A*: 0.0865370687560909
+Average path length compared to A*: 1.11687723926191

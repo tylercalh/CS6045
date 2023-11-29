@@ -41,7 +41,7 @@ public class Graph {
         File coord_file = new File(coord_filepath);
 
         try {
-            int[][] vertexCoords = GraphUtility.VertexCoordsFromfile(coord_file);
+            double[][] vertexCoords = GraphUtility.VertexCoordsFromfile(coord_file);
             double[][] adjacency_matrix = GraphUtility.AdjMatrixFromFile(adj_file);
 
             this.adjacency_matrix = GraphUtility.WeightedAdjMatrixFromCoords(adjacency_matrix, vertexCoords);
@@ -59,4 +59,8 @@ public class Graph {
         }
         return nodes;
     }
+    public int getNodeCount() {
+        return adjacency_matrix.length;
+    }
+    
 }

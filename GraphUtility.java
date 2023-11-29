@@ -7,7 +7,7 @@ public class GraphUtility {
     // Use for testing
     // public static void main(String[] args) {
     // try {
-    // int[][] coords = VertexCoordsFromfile(new
+    // double[][] coords = VertexCoordsFromfile(new
     // File("./graphs/simple/coords.txt"));
     // int[][] adjM = AdjMatrixFromFile(new File("./graphs/simple/adj.txt"));
     // double[][] wAdjM = WeightedAdjMatrixFromCoords(adjM, coords);
@@ -69,14 +69,14 @@ public class GraphUtility {
         return vertexCoords;
     }
 
-    public static double[][] WeightedAdjMatrixFromCoords(double[][] adjacencyMatrix, int[][] coords) {
+    public static double[][] WeightedAdjMatrixFromCoords(double[][] adjacencyMatrix, double[][] coords) {
         double[][] wAdjMatrix = new double[adjacencyMatrix.length][adjacencyMatrix.length];
         for (int i = 0; i < adjacencyMatrix.length; i++) {
             for (int j = 0; j < adjacencyMatrix.length; j++) {
                 if (adjacencyMatrix[i][j] != 0) {
                     // Gets the distance between the points i and j
-                    int dX = coords[i][0] - coords[j][0];
-                    int dY = coords[i][1] - coords[j][1];
+                    double dX = coords[i][0] - coords[j][0];
+                    double dY = coords[i][1] - coords[j][1];
                     double distance = Math.sqrt((dX * dX) + (dY * dY));
                     wAdjMatrix[i][j] = distance;
                 }

@@ -7,6 +7,8 @@ public class PathFinder {
     double[][] adjacency_matrix;
     HashMap<Integer, PathNode> nodes;
     int nodesVisited;
+    double epsilon;
+    int totalNodes;
 
     PathFinder(double[][] adjacency_matrix) {
         this.adjacency_matrix = adjacency_matrix;
@@ -15,6 +17,7 @@ public class PathFinder {
             this.nodes.put(i, new PathNode(i));
         }
         this.nodesVisited = -1;
+        totalNodes = adjacency_matrix[0].length;
     }
 
     public ArrayList<Integer> findPath(int start, int goal) {
@@ -83,7 +86,7 @@ public class PathFinder {
         return path;
     }
 
-    public ArrayList<Integer> findPath(int start, int goal, int[][] coordinates) {
+    public ArrayList<Integer> findPath(int start, int goal, double[][] coordinates) {
         PriorityQueue<PathNode> open = new PriorityQueue<>((o1, o2) -> Double.compare(o1.gn + o1.hn, o2.gn + o2.hn));
         HashSet<Integer> closed = new HashSet<>();
         ArrayList<Integer> path = new ArrayList<>();
@@ -141,5 +144,86 @@ public class PathFinder {
 
     private double getDistance(double x1, double y1, double x2, double y2) {
         return Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+    }
+
+    public Results findPath(int startNode, int goalNode, double[][] coordinates, double epsilon) {
+        PriorityQueue<PathNode> openSet = new PriorityQueue<>(
+                (node1, node2) -> Double.compare(node1.getCost() + dynamicWeight(node1) * heuristic(node1, goalNode, coordinates),
+                        node2.getCost() + dynamicWeight(node2) * heuristic(node2, goalNode, coordinates)));
+
+        HashSet<Integer> closedSet = new HashSet<>();
+        PathNode start = nodes.get(startNode);
+        start.gn = 0;
+        start.hn = heuristic(start, goalNode, coordinates);
+        start.depth = 0; 
+        openSet.add(start);
+
+        int nodesVisited = 0;
+
+        while (!openSet.isEmpty()) {
+            PathNode current = openSet.poll();
+            if (current.index == goalNode) {
+                return reconstructPath(nodes, goalNode, nodesVisited);
+            }
+            closedSet.add(current.index);
+            nodesVisited++;
+    
+            for (Integer neighborId : getNeighbors(current.index)) {
+                if (closedSet.contains(neighborId))
+                    continue;
+                PathNode neighbor = nodes.get(neighborId);
+                double tentativeGScore = current.gn + adjacency_matrix[current.index][neighborId];
+    
+                if (tentativeGScore < neighbor.gn) {
+                    neighbor.gn = tentativeGScore;
+                    neighbor.hn = heuristic(neighbor, goalNode, coordinates);
+                    neighbor.parent = current;
+                    neighbor.depth = current.depth + 1;
+    
+                    if (!openSet.contains(neighbor)) {
+                        openSet.add(neighbor);
+                    }
+                }
+            }
+        }
+
+        return new Results(); 
+    }
+
+    private double dynamicWeight(PathNode node) {
+        return 1 + Math.exp(-Math.E * node.depth / totalNodes);
+    }
+
+    private double heuristic(PathNode node, int goalNode, double[][] coordinates) {
+        double[] nodeCoords = coordinates[node.getId()];
+        double[] goalCoords = coordinates[goalNode];
+        return Math.sqrt(Math.pow(nodeCoords[0] - goalCoords[0], 2) + Math.pow(nodeCoords[1] - goalCoords[1], 2));
+    }
+
+    private Results reconstructPath(HashMap<Integer, PathNode> nodes, int goalNode, int nodesVisited) {
+        ArrayList<Integer> path = new ArrayList<>();
+        PathNode current = nodes.get(goalNode);
+        double distance = 0.0;
+
+        while (current != null && current.parent != null) {
+            path.add(0, current.index);
+            distance += this.adjacency_matrix[current.index][current.parent.index];
+            current = current.parent;
+        }
+        if (current != null) {
+            path.add(0, current.index);
+        }
+
+        return new Results(path, nodesVisited, distance);
+    }
+
+    private ArrayList<Integer> getNeighbors(int nodeIndex) {
+        ArrayList<Integer> neighbors = new ArrayList<>();
+        for (int i = 0; i < adjacency_matrix[nodeIndex].length; i++) {
+            if (adjacency_matrix[nodeIndex][i] != 0) {
+                neighbors.add(i);
+            }
+        }
+        return neighbors;
     }
 }

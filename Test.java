@@ -12,12 +12,22 @@ public class Test {
         String coordinatesMediumPath = "./graphs/medium/coords.txt";
         String coordinatesDifficultPath = "./graphs/difficult/coords.txt";
 
+        String wAdjacencyMatrixSmallPathDynamic = "./more_graphs/realistic_small/wadj.txt";
+        String adjacencyMatrixSmallPathDynamic = "./more_graphs/realistic_small/adj.txt";
+        String coordinatesSmallPathDynamic = "./more_graphs/realistic_small/coords.txt";
+        String wAdjacencyMatrixMediumPathDynamic = "./more_graphs/realistic_medium/wadj.txt";
+        String adjacencyMatrixMediumPathDynamic = "./more_graphs/realistic_medium/adj.txt";
+        String coordinatesMediumPathDynamic = "./more_graphs/realistic_medium/coord.txt";
+        String wAdjacencyMatrixLargePathDynamic = "./more_graphs/realistic_large/wadj.txt";
+        String adjacencyMatrixLargePathDynamic = "./more_graphs/realistic_large/adj.txt";
+        String coordinatesLargePathDynamic = "./more_graphs/realistic_large/coord.txt";
+
         double[][] adjacencyMatrixSimple;
         double[][] adjacencyMatrixMedium;
         double[][] adjacencyMatrixDifficult;
-        int[][] coordinatesSimple;
-        int[][] coordinatesMedium;
-        int[][] coordinatesDifficult;
+        double[][] coordinatesSimple;
+        double[][] coordinatesMedium;
+        double[][] coordinatesDifficult;
 
         double[][] wAdjacencyMatrixSimple;
         double[][] wAdjacencyMatrixMedium;
@@ -109,7 +119,34 @@ public class Test {
         printPath(foundPath);
         System.out.println("Nodes visited: " + pathFinderDifficult.nodesVisited);
         System.out.println("Duration: " + duration + " ns\n");
+
+        System.out.println("Testing DynamicWeightingAStar:\n");
+
+        double epsilon = 1.0; 
+
+        pathFinderSimple = new PathFinder(adjacencyMatrixSimple);
+        pathFinderMedium = new PathFinder(adjacencyMatrixMedium);
+        pathFinderDifficult = new PathFinder(adjacencyMatrixDifficult);
+        Results pathFound;
+        startTime = System.nanoTime();
+        pathFound = pathFinderSimple.findPath(0, 5, coordinatesSimple, epsilon);
+        endTime = System.nanoTime();
+        printResults(pathFound, endTime-startTime);
+
+        startTime = System.nanoTime();
+        pathFound = pathFinderMedium.findPath(0, 11, coordinatesMedium, epsilon);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        printResults(pathFound, duration);
+
+        startTime = System.nanoTime();
+        pathFound = pathFinderDifficult.findPath(0, 11, coordinatesDifficult, epsilon);
+        endTime = System.nanoTime();
+        duration = endTime - startTime;
+        printResults(pathFound, duration);
+        
     }
+
 
     private static void printPath(ArrayList<Integer> path) {
         System.out.print("Path: ");
@@ -118,4 +155,22 @@ public class Test {
         }
         System.out.println();
     }
+
+    private static void printResults(Results results, long duration) {
+        ArrayList<Integer> path = results.getPath();
+        if (path != null) {
+            System.out.print("Path: ");
+            for (int index : path) {
+                System.out.print(index + " ");
+            }
+            System.out.println();
+        } else {
+            System.out.println("No path found.");
+        }
+        System.out.println("Nodes visited: " + results.getNumNodesExplored());
+        System.out.println("Path length: " + results.getPathLength());
+        System.out.println("Duration: " + duration + " ns\n");
+    }
+    
+
 }

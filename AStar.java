@@ -6,11 +6,9 @@ import java.util.PriorityQueue;
 // An implmentation of A* that uses euclidean distance as its heuristic.
 public class AStar implements IPathFinder {
     public double weight;
-    private double multiplier;
 
     public AStar() {
         this.weight = 1.0;
-        this.multiplier = 1.0;
     }
 
     // Constructor with specified weight.
@@ -19,12 +17,6 @@ public class AStar implements IPathFinder {
     // When weight is greater than 1.0 h(n) begins to dominate g(n).
     public AStar(double weight) {
         this.weight = weight;
-        this.multiplier = 1.0;
-    }
-
-    public AStar(double weight, double multiplier) {
-        this.weight = weight;
-        this.multiplier = multiplier;
     }
 
     public Results findPath(Graph g, int start, int goal) {
@@ -114,6 +106,7 @@ public class AStar implements IPathFinder {
                     // This pattern of removing then adding will force the PriorityQueue class to update the position of the node in the queue, or just add the node if it isn't already in the queue
                     open.remove(neighborNode);
                     open.add(neighborNode);
+                    System.out.println(" ");
                 }
             }
         }
@@ -123,6 +116,6 @@ public class AStar implements IPathFinder {
     }
 
     private double getDistance(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1))) * Math.pow(10, multiplier);
+        return Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
     }
 }

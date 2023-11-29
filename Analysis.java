@@ -77,7 +77,6 @@ public class Analysis {
                         aEStar_totalPathLengthPercent += aEStar_results.getPathLength() / aStar_results.getPathLength();
                     }
                 }
-                // TODO: Output results by appending to files
                 wAStar_str += "---" + e + "---\n" +
                         "Average nodes visited compared to A*: " + (wAStar_totalNodesVisitedPercent / numRuns) + "\n" +
                         "Average path length compared to A*: " + (wAStar_totalPathLengthPercent / numRuns) + "\n";
